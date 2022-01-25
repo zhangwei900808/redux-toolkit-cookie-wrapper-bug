@@ -21,7 +21,7 @@ const rootReducer = (state, action) => {
   return combinedReducers(state, action)
 }
 
-export const initStore = configureStore({
+export const initStore = () => configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(
     nextReduxCookieMiddleware({
@@ -32,6 +32,6 @@ export const initStore = configureStore({
   )
 })
 
-export const store = wrapMakeStore(() => initStore);
+export const store = wrapMakeStore(initStore);
 export const wrapper = createWrapper(store, {storeKey: 'key', debug: process.env.NODE_ENV === `development`});
 
